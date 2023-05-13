@@ -1,0 +1,6 @@
+[chrome]
+userDataDir = C:\Users\zlh13\AppData\Local\Google\Chrome\User Data
+host = 127.0.0.1
+port = 9222
+[backpack]
+count = 2
