@@ -9,6 +9,12 @@
 
 可能需要将***Google\Chrome\Application***添加到环境变量中
 
+在**common\config**中为***userDataDir***添加目录
+
+例如 ***userDataDir = C:\Users\username\AppData\Local\Google\Chrome\User Data***
+
+> 注：此目录只是作为浏览器用户数据存放位置，可以自己新建一个文件夹给脚本用，避免污染自己的浏览器记录
+
 同时在软件解压出的包目录下也放入**chromedriver.exe**
 
 最后双击**StarRailStationBackpackRecognitionUpload.exe**即可运行脚本
