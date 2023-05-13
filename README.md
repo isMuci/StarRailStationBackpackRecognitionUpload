@@ -12,3 +12,6 @@
 同时在软件解压出的包目录下也放入**chromedriver.exe**
 
 最后双击**StarRailStationBackpackRecognitionUpload.exe**即可运行脚本
+
+$\color{red}{**##部分材料因均衡等级不够未能获得，后续等级达到后会进行更新##**}$
+
