@@ -23,7 +23,6 @@ pytesseract.pytesseract.tesseract_cmd = r'./Resources/Tesseract-OCR/tesseract'
 
 ui.FAILSAFE = False
 
-
 map = {}
 material = []
 file_list = []
@@ -33,7 +32,8 @@ host = 'host'
 port = 'port'
 automotive = False
 
-#获得文件
+
+# 获得文件
 def getconfig(section, option):
     conf = configparser.ConfigParser()
     conf.read('./common/config')
@@ -57,7 +57,8 @@ def get_window_rect(hwnd):
           )
         return rect.left, rect.top, rect.right, rect.bottom
 
-#截取背包
+
+# 截取背包
 def shot():
     # print(automode)
     i = int(getconfig('backpack', 'count'))
@@ -87,10 +88,13 @@ def shot():
             ui.moveTo(wc, hc, duration=0.1)
             ui.dragRel(0, -400, duration=1)
 
-#清空背包截图
+
+# 清空背包截图
 def del_file_list(path):
     print('正在清空历史用户背包截图......')
     for file_name in os.listdir(path):
+        if file_name == '.gitignore':
+            continue
         os.remove(path + "\\" + file_name)
 
 
@@ -226,6 +230,8 @@ def count(box, backpack, meter):
 def get_file_list(path):
     print('正在获取用户背包截图......')
     for file_name in os.listdir(path):
+        if file_name == '.gitignore':
+            continue
         file_list.append(file_name)
     return file_list
 
@@ -327,7 +333,8 @@ def update(browser):
         print(type(e))
         update(browser)
 
-#自动模式
+
+# 自动模式
 def automation():
     shot()
     countback()
@@ -343,11 +350,13 @@ def showmenu():
     print('===4 automation=======')
     print('===5 exitscript=======')
 
-#退出
+
+# 退出
 def exit():
     return True
 
-#获取脚本管理员权限
+
+# 获取脚本管理员权限
 def is_admin():
     try:
         return ctypes.windll.shell32.IsUserAnAdmin()
@@ -364,7 +373,8 @@ opts = {
     5: exit
 }
 
-#启动脚本
+
+# 启动脚本
 def start():
     if is_admin():
         # 将要运行的代码加到这里
