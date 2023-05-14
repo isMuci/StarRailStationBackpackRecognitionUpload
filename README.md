@@ -1,4 +1,7 @@
 # StarRailStationBackpackRecognitionUpload
+
+## 使用说明
+
 星穹铁道[StarRailStation](https://starrailstation.com/cn)养成计算页面背包材料识别上传工具
 
 目前只做了**chrome**的适配
@@ -18,4 +21,14 @@
 最后双击**StarRailStationBackpackRecognitionUpload.exe**即可运行脚本
 
 **##部分材料因均衡等级不够未能获得，后续等级达到后会进行更新##**
+
+------
+
+## 致谢
+
+#### 开源库
+
+- 图像识别库：[opencv](https://github.com/opencv/opencv.git)
+
+- 文字识别库：[Tesseract-OCR](https://github.com/tesseract-ocr/tesseract)
 
