@@ -150,11 +150,11 @@ def getmaterial(mete):
     # # mete.replace[',',':']
     # arr=s.split(':')
     # print(s)
-    cropped_img = img[585:665, 620:670]
+    cropped_img = img[440:523, 366:441]
 
     print(cropped_img.shape)
 
-    cv2.imwrite(f'./Resources/material/fengraozhizhong.jpg', cropped_img, [int(cv2.IMWRITE_JPEG_QUALITY), 95])
+    cv2.imwrite(f'./Resources/material/qunxingyuezhang.jpg', cropped_img, [int(cv2.IMWRITE_JPEG_QUALITY), 95])
 
 
 # 匹配素材
@@ -239,10 +239,9 @@ def get_file_list(path):
 # 开始计算背包内素材
 def countback():
     idmap = {}
-    dir = []
     id = 0
     get_file_list('./Resources/backpack')
-    with open('./Resources/locate.txt', 'r', encoding='utf-8') as f:
+    with open('Resources/locate', 'r', encoding='utf-8') as f:
         for line in f:
             met = line.strip().split(' ')
 
@@ -255,7 +254,6 @@ def countback():
     # print(map)
     id = 0
     for meter in map:
-        # cnt=0
         for backpack in file_list:
             box = comparison(backpack, meter)
             if (box != None):
@@ -266,12 +264,11 @@ def countback():
                     # print(f'{material[idmap[meter]][0]} {material[idmap[meter]][1]}!!!!!!')
                     id += 1
                     break
-    #     print(f'{meter}  {cnt}')
-    #     dir.append(f'{meter}  {cnt}')
-    # for i in range(0,len(dir)):
-    #     print(f'{i} {dir[i]}')
-    # for i in range(0,len(material)):
-    #     print(f'{i} {material[i][0]} {material[i][1]}')
+    open('Resources/backpack-count', 'w').close()
+    f = open('Resources/backpack-count', 'w', encoding='utf-8')
+    for i in range(0, len(material)):
+        f.write(f'{material[i][0]} {material[i][1]}\n')
+        # f.write(f'{material[i][0]} 0\n')
 
 
 # 连接浏览器
@@ -310,12 +307,21 @@ def linkChrome():
 def update(browser):
     try:
         print("正在寻找背包按钮......")
-        # //*[@id="page"]/div[2]/div[2]/div[2]/button[3]
-        browser.find_element(By.XPATH, '//*[@id="page"]/div[2]/div[2]/div[2]/button[3]').click()
+        # //*[@id="page"]/div[2]/div[2]/div[2]/div/div/button[3]
+        browser.find_element(By.XPATH, '//*[@id="page"]/div[2]/div[2]/div[2]/div/div/button[3]').click()
 
         print("正在获取背包内容表......")
         # //*[@id="page"]/div[2]/div[3]/div/div/div[2]/div/div
         list = browser.find_elements(By.XPATH, '//*[@id="page"]/div[2]/div[3]/div/div/div[2]/div/div/div')
+
+        global material
+        if len(material) == 0:
+            materialHistory = []
+            with open('Resources/backpack-count', 'r', encoding='utf-8') as f:
+                for line in f:
+                    met = line.strip().split(' ')
+                    materialHistory.append([met[0], met[1]])
+            material = materialHistory
 
         print("正在向背包内填入材料......")
         cnt = 0
