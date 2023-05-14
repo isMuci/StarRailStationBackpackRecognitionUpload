@@ -1,5 +1,5 @@
 # StarRailStationBackpackRecognitionUpload
-[StarRailStation](https://starrailstation.com/cn)养成计算页面背包材料识别上传工具
+星穹铁道[StarRailStation](https://starrailstation.com/cn)养成计算页面背包材料识别上传工具
 
 目前只做了**chrome**的适配
 
