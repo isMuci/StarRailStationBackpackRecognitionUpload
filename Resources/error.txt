@@ -1,0 +1,1 @@
+(1400, 'SetForegroundWindow', '无效的窗口句柄。')
