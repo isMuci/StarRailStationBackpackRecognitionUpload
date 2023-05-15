@@ -1,1 +1,1 @@
-'numpy.ndarray' object has no attribute 'save'
+'NoneType' object has no attribute 'shape'

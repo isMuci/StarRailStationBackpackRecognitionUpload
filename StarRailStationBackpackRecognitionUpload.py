@@ -60,7 +60,6 @@ def get_window_rect(hwnd):
 
 # 截取背包
 def shot():
-    # print(automode)
     i = int(getconfig('backpack', 'count'))
     if automotive == False:
         print('请输入背包截取的张数:\t')
@@ -72,7 +71,7 @@ def shot():
     del_file_list(f'./Resources/backpack')
     shell = win32com.client.Dispatch("WScript.Shell")
     shell.SendKeys('%')
-    # ui.PAUSE = 0.03
+
     wc = left + (right - left) / 2
     hc = top + (bot - top) / 2
     win32gui.SetForegroundWindow(hwnd)
@@ -138,27 +137,21 @@ def screenshot(hwnd, path):
 def getmaterial(mete, top, bot, left, right):
     img = cv2.imread('./Resources/backpack/backpack_0.png')
     print(img.shape)
-    # s=map[mete]
-    # s=s.replace('[','')
-    # s = s.replace(']', '')
-    # s = s.replace(',', ':')
-    # # mete.replace[',',':']
-    # arr=s.split(':')
-    # print(s)
+
     cropped_img = img[top:bot, left:right]
 
     print(cropped_img.shape)
 
-    cv2.imwrite(f'./Resources/material/{mete}.png', cropped_img, [int(cv2.IMWRITE_JPEG_QUALITY), 95])
+    cv2.imwrite(f'./Resources/material/{mete}.png', cropped_img, [cv2.IMWRITE_PNG_COMPRESSION, 0])
 
 
 # 匹配素材
 def comparison(backpack, meter):
-    img = cv2.imread(f'./Resources/backpack/{backpack}')
+    img = cv2.imread(f'./Resources/backpack/{backpack}',0)
     # print(img.shape)
-    material = cv2.imread(f"./Resources/material/{map[meter]}.png")
+    material = cv2.imread(f"./Resources/material/{map[meter]}.png",0)
     # print(material.shape)
-    h, w, i = material.shape
+    h, w = material.shape
     res = cv2.matchTemplate(img, material, cv2.TM_SQDIFF_NORMED)
     # print(cv2.minMaxLoc(res))
     if (cv2.minMaxLoc(res)[0] >= 0.2):
@@ -179,12 +172,15 @@ def count(box, backpack, meter):
     new_img = cv2.cvtColor(img_orig, cv2.COLOR_BGR2GRAY)
     upper_left = box[0]
     lower_right = box[1]
+
+    # cv2.imshow('img', new_img[lower_right[1]-100:lower_right[1] + 20, upper_left[0] - 10:lower_right[0] + 10])
+    # cv2.waitKey()
+
     if (map[meter] == 'xinyongdian'):
         new_img = new_img[upper_left[1]:lower_right[1], lower_right[0]:lower_right[0] + 100]
     else:
         new_img = new_img[lower_right[1]:lower_right[1] + 20, upper_left[0] - 10:lower_right[0] + 10]
 
-    # thresh, new_img = cv2.threshold(new_img, 150, 255, cv2.THRESH_BINARY)
     # 设置阈值
     height, width = new_img.shape[0:2]
     points = (width * 3, height * 3)
@@ -201,14 +197,16 @@ def count(box, backpack, meter):
             # 如果小于阈值，就直接改为0
             elif gray < thresh:
                 new_img[row, col] = 255
-    #
-    # cv2.imwrite(f"./Resources/count/{map[meter]}.png", new_img, [int(cv2.IMWRITE_JPEG_QUALITY), 95])
-    #
+
+    cv2.imwrite(f"./Resources/count/{map[meter]}.png", new_img, [cv2.IMWRITE_PNG_COMPRESSION, 0])
+
     string = pytesseract.image_to_string(new_img, lang='eng',
                                          config='--psm 6 --oem 3 -c tessedit_char_whitelist=0123456789').strip()
+
     # print(string)
     # cv2.imshow('img', new_img)
     # cv2.waitKey()
+
     if (string == ''):
         print(f'计算素材{meter}失败！！！！！！！')
         return -1
@@ -402,5 +400,5 @@ def start():
 
 
 if __name__ == '__main__':
-    getmaterial('asdad', 300, 600, 300, 500)
-    # start()
+    # getmaterial('shengmingzhiya', 448, 530, 852, 912)
+    start()
