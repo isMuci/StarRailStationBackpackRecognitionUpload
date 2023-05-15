@@ -83,7 +83,7 @@ def shot():
     for idx in range(i):
         print('正在截取背包......')
         time.sleep(0.5)
-        screenshot(hwnd, f'./Resources/backpack/backpack_{idx}.jpg')
+        screenshot(hwnd, f'./Resources/backpack/backpack_{idx}.png')
         if idx != (i - 1):
             ui.moveTo(wc, hc, duration=0.1)
             ui.dragRel(0, -400, duration=1)
@@ -135,13 +135,8 @@ def screenshot(hwnd, path):
 
 
 # 截取素材
-def getmaterial(mete):
-    # hwnd = win32gui.FindWindow('UnityWndClass', '崩坏：星穹铁道')  # 根据窗口名称获取窗口对象
-    # del_file_list(f'./Resources/backpack')
-    # win32gui.SetForegroundWindow(hwnd)
-    # time.sleep(1)
-    # screenshot(hwnd, f'./Resources/backpack/backpack_1.jpg')
-    img = cv2.imread('./Resources/backpack/backpack_0.jpg')
+def getmaterial(mete, top, bot, left, right):
+    img = cv2.imread('./Resources/backpack/backpack_0.png')
     print(img.shape)
     # s=map[mete]
     # s=s.replace('[','')
@@ -150,18 +145,18 @@ def getmaterial(mete):
     # # mete.replace[',',':']
     # arr=s.split(':')
     # print(s)
-    cropped_img = img[440:523, 366:441]
+    cropped_img = img[top:bot, left:right]
 
     print(cropped_img.shape)
 
-    cv2.imwrite(f'./Resources/material/qunxingyuezhang.jpg', cropped_img, [int(cv2.IMWRITE_JPEG_QUALITY), 95])
+    cv2.imwrite(f'./Resources/material/{mete}.png', cropped_img, [int(cv2.IMWRITE_JPEG_QUALITY), 95])
 
 
 # 匹配素材
 def comparison(backpack, meter):
     img = cv2.imread(f'./Resources/backpack/{backpack}')
     # print(img.shape)
-    material = cv2.imread(f"./Resources/material/{map[meter]}{'.png' if map[meter] == 'xinyongdian' else '.jpg'}")
+    material = cv2.imread(f"./Resources/material/{map[meter]}.png")
     # print(material.shape)
     h, w, i = material.shape
     res = cv2.matchTemplate(img, material, cv2.TM_SQDIFF_NORMED)
@@ -207,7 +202,7 @@ def count(box, backpack, meter):
             elif gray < thresh:
                 new_img[row, col] = 255
     #
-    cv2.imwrite(f"./Resources/count/{map[meter]}.jpg", new_img, [int(cv2.IMWRITE_JPEG_QUALITY), 95])
+    # cv2.imwrite(f"./Resources/count/{map[meter]}.png", new_img, [int(cv2.IMWRITE_JPEG_QUALITY), 95])
     #
     string = pytesseract.image_to_string(new_img, lang='eng',
                                          config='--psm 6 --oem 3 -c tessedit_char_whitelist=0123456789').strip()
@@ -407,5 +402,5 @@ def start():
 
 
 if __name__ == '__main__':
-    # getmaterial('asdad')
-    start()
+    getmaterial('asdad', 300, 600, 300, 500)
+    # start()
