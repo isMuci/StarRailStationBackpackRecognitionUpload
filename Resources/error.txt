@@ -1,1 +1,2 @@
-(1400, 'SetForegroundWindow', '无效的窗口句柄。')
+OpenCV(4.7.0) D:\a\opencv-python\opencv-python\opencv\modules\imgproc\src\templmatch.cpp:1175: error: (-215:Assertion failed) _img.size().height <= _templ.size().height && _img.size().width <= _templ.size().width in function 'cv::matchTemplate'
+

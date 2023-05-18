@@ -3,6 +3,7 @@ import pyautogui as ui
 from getBackpak import shot
 from countBackpack import count_backpack
 from uploadBackpack import linkWeb
+from getMaterial import get_material
 
 pytesseract.pytesseract.tesseract_cmd = r'./Resources/Tesseract-OCR/tesseract'
 
@@ -26,11 +27,6 @@ def show_menu():
     print('===3 updatebackpack===')
     print('===4 automation=======')
     print('===5 exitscript=======')
-
-
-# 退出
-def exit_script():
-    return True
 
 
 # 启动脚本
@@ -61,7 +57,7 @@ def start():
 
 
 if __name__ == '__main__':
-    # get_material('shengmingzhiya', 448, 530, 852, 912)
+    # get_material('chenlunheiyao', 440, 523, 360, 445)
     start()
 
 # 打包命令
