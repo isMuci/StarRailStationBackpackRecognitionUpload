@@ -18,5 +18,4 @@ def linkEdge():
 
     print('正在连接浏览器......')
     browser = webdriver.Edge(options=options)
-    print(browser)
     return browser

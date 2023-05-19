@@ -2,8 +2,8 @@ import cv2
 
 
 # 截取素材
-def get_material(mete, top, bot, left, right):
-    img = cv2.imread('./Resources/backpack/backpack_0.png')
+def get_material(num,mete, top, bot, left, right):
+    img = cv2.imread(f'./Resources/backpack/backpack_{num}.png')
     print(img.shape)
 
     cropped_img = img[top:bot, left:right]

@@ -86,7 +86,7 @@ def shot(automotive):
         ui.moveTo(wc, hc, duration=0.1)
         ui.dragRel(0, 400, duration=1)
     for idx in range(i):
-        print('正在截取背包......')
+        print(f'正在截取第 {i+1} 张背包......')
         time.sleep(0.5)
         screenshot(hwnd, f'./Resources/backpack/backpack_{idx}.png')
         if idx != (i - 1):

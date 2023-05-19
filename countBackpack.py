@@ -1,3 +1,4 @@
+import json
 import cv2
 import pytesseract
 from fileSystem import *
@@ -13,8 +14,8 @@ def comparison(backpack, meter):
     # print(material.shape)
     h, w = material.shape
     res = cv2.matchTemplate(img, material, cv2.TM_SQDIFF_NORMED)
-    # print(cv2.minMaxLoc(res))
-    if cv2.minMaxLoc(res)[0] >= 0.2:
+    print(cv2.minMaxLoc(res))
+    if cv2.minMaxLoc(res)[0] >= 0.1:
         print(f'匹配{meter}失败')
         return None
     else:
@@ -58,14 +59,10 @@ def count(box, backpack, meter):
             elif gray < thresh:
                 new_img[row, col] = 255
 
-    cv2.imwrite(f"./Resources/count/{material_map[meter]}.png", new_img, [cv2.IMWRITE_PNG_COMPRESSION, 0])
-
     string = pytesseract.image_to_string(new_img, lang='eng',
                                          config='--psm 6 --oem 3 -c tessedit_char_whitelist=0123456789').strip()
 
-    # print(string)
-    # cv2.imshow('img', new_img)
-    # cv2.waitKey()
+    print(string)
 
     if string == '':
         print(f'计算素材{meter}失败！！！！！！！')
@@ -85,16 +82,13 @@ def count_backpack():
     material = []
     idx = 0
     file_list = get_file_list('./Resources/backpack')
-    with open('Resources/locate', 'r', encoding='utf-8') as f:
-        for line in f:
-            met = line.strip().split(' ')
-
-            material.append([met[0], 0])
-            idmap[met[0]] = idx
-            idx += 1
-
-            if len(met) > 2:
-                material_map[met[0]] = met[1]
+    with open('Resources/materiallist.json', 'r', encoding='utf-8') as f:
+        materialist = json.load(f)
+    for key in materialist:
+        material.append([key, 0])
+        idmap[key] = idx
+        idx += 1
+        material_map[key] = materialist[key]
     # print(map)
     idx = 0
     for meter in material_map:

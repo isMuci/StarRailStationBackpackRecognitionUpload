@@ -11,6 +11,7 @@ ui.FAILSAFE = False
 
 material = []
 
+
 # 自动模式
 def automation(automotive):
     shot(automotive)
@@ -56,9 +57,8 @@ def start():
 
 
 if __name__ == '__main__':
-    # get_material('chenlunheiyao', 440, 523, 360, 445)
+    # get_material(0, 'lianxingzheleizhi', 152, 239, 962, 1043)
     start()
-
 # 打包命令
-# pyinstaller --uac-admin StarRailStationBackpackRecognitionUpload.py
+# pyinstaller StarRailStationBackpackRecognitionUpload.spec
 # 开发请注意将pycharm的兼容性设置中的以管理员身份运行打开
