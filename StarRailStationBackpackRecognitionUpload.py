@@ -11,7 +11,6 @@ ui.FAILSAFE = False
 
 material = []
 
-
 # 自动模式
 def automation(automotive):
     shot(automotive)

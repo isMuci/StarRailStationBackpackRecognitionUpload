@@ -1,6 +1,8 @@
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from chromeDriver import *
+from edgeDriver import *
+from getConfig import *
 
 
 # 更新背包
@@ -42,8 +44,11 @@ def update(browser, material):
 
 # 连接浏览器
 def linkWeb(material):
-    browser = linkChrome()
-
+    driver = getconfig('browser', 'browser')
+    if driver == 'chrome':
+        browser = linkChrome()
+    elif driver == "edge":
+        browser = linkEdge()
     try:
         print('正在打开铁道站养成计算页面...')
         browser.get("https://starrailstation.com/cn/planner")
