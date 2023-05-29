@@ -57,7 +57,7 @@ def start():
 
 
 if __name__ == '__main__':
-    # get_material(0, 'lianxingzheleizhi', 152, 239, 962, 1043)
+    # get_material(0, 'xinyongdian', 72, 100, 1230, 1265)
     start()
 # 打包命令
 # pyinstaller StarRailStationBackpackRecognitionUpload.spec

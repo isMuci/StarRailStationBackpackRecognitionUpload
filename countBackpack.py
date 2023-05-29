@@ -14,7 +14,7 @@ def comparison(backpack, meter):
     # print(material.shape)
     h, w = material.shape
     res = cv2.matchTemplate(img, material, cv2.TM_SQDIFF_NORMED)
-    print(cv2.minMaxLoc(res))
+    # print(cv2.minMaxLoc(res))
     if cv2.minMaxLoc(res)[0] >= 0.1:
         print(f'匹配{meter}失败')
         return None
