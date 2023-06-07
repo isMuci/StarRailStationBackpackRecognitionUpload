@@ -11,11 +11,13 @@ def update(browser, material):
         print("正在寻找背包按钮......")
         # //*[@id="page"]/div[2]/div[2]/div[2]/div/div/button[3]
         # //*[@id="page"]/div[2]/div[2]/div[1]/div/div/button[3]
-        browser.find_element(By.XPATH, '//*[@id="page"]/div[2]/div[2]/div[1]/div/div/button[3]').click()
+        browser.find_element(By.XPATH, '//*[@id="page"]/div[2]/div[2]/div[2]/div/div/button[3]/span').click()
 
         print("正在获取背包内容表......")
         # //*[@id="page"]/div[2]/div[3]/div/div/div[2]/div/div
-        material_list = browser.find_elements(By.XPATH, '//*[@id="page"]/div[2]/div[3]/div/div/div[2]/div/div/div')
+
+        # material_list = browser.find_elements(By.XPATH, '//*[@id="page"]/div[2]/div[3]/div/div/div[2]/div/div/div')
+        material_list = browser.find_elements(By.XPATH, '//*[@id="page"]/div[2]/div[3]/div/div/div[1]/div[2]')
 
         if len(material) == 0:
             materialHistory = []
@@ -36,6 +38,7 @@ def update(browser, material):
             cnt += 1
         # print("4")
         # //*[@id="page"]/div[2]/div[3]/div/div/div[1]/div[2]/button[1]
+        # 寻找保存按钮
         browser.find_element(By.XPATH, '//*[@id="page"]/div[2]/div[3]/div/div/div[1]/div[2]/button[1]').click()
     except Exception as e:
         print(type(e))
