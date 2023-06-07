@@ -1,0 +1,6 @@
+PyAutoGUI~=0.9.54
+Pillow~=9.5.0
+pytesseract~=0.3.10
+pywin32
+opencv-python
+selenium
