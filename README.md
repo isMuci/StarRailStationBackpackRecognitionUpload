@@ -1,6 +1,8 @@
 # StarRailStationBackpackRecognitionUpload
 
+## 注意
 
+工具需要在 **1920*1080全屏幕** 分辨率下使用，此外的分辨率均有概率导致工具识别出错
 
 ## 介绍
 
