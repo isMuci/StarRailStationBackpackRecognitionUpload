@@ -2,6 +2,9 @@ import json
 import cv2
 import pytesseract
 from fileSystem import *
+from colorama import init
+
+init(autoreset=True)
 
 material_map = {}
 
@@ -14,7 +17,7 @@ def comparison(backpack, meter):
     # print(material.shape)
     h, w = material.shape
     res = cv2.matchTemplate(img, material, cv2.TM_SQDIFF_NORMED)
-    print(cv2.minMaxLoc(res))
+    # print(cv2.minMaxLoc(res))
     if cv2.minMaxLoc(res)[0] >= 0.10:
         print(f'匹配{meter}失败')
         return None
@@ -74,14 +77,14 @@ def count(box, backpack, meter):
     cv2.imwrite(f'./out/{material_map[meter]}.png',new_img)
 
     if string == '':
-        print(f'计算素材{meter}失败！！！！！！！')
+        print(f'计算素材\033[32m{meter}\033[0m失败！！！！！！！')
         return -1
     else:
-        print(f'素材 {meter} 的个数为 \033[31m{string}\033[0m')
+        print(f"素材 \033[32m{meter}\033[0m 的个数为 \033[31m{string}\033[0m")
         try:
             return int(string)
         except:
-            print(f'计算素材{meter}失败！！！！！！！')
+            print(f'计算素材\033[32m{meter}\033[0m失败！！！！！！！')
             return -1
 
 
