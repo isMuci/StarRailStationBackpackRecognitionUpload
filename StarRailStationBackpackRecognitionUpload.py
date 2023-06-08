@@ -14,8 +14,9 @@ material = []
 
 # 自动模式
 def automation(automotive):
+    global material
     shot(automotive)
-    count_backpack()
+    material = count_backpack()
     linkWeb(material)
 
 
@@ -31,6 +32,7 @@ def show_menu():
 
 # 启动脚本
 def start():
+    global material
     try:
         print('在使用脚本前，请先打开星穹铁道，并进入背包材料界面......')
         while True:
@@ -41,7 +43,7 @@ def start():
             if opt == 1:
                 shot(automotive)
             elif opt == 2:
-                count_backpack()
+                material = count_backpack()
             elif opt == 3:
                 linkWeb(material)
             elif opt == 4:
@@ -57,7 +59,7 @@ def start():
 
 
 if __name__ == '__main__':
-    # get_material(0, 'xinyongdian', 72, 100, 1230, 1265)
+    # get_material(0, 'manyouzhinan', 148, 221, 0, 300)
     start()
 # 打包命令
 # pyinstaller StarRailStationBackpackRecognitionUpload.spec

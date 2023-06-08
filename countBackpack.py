@@ -14,8 +14,8 @@ def comparison(backpack, meter):
     # print(material.shape)
     h, w = material.shape
     res = cv2.matchTemplate(img, material, cv2.TM_SQDIFF_NORMED)
-    # print(cv2.minMaxLoc(res))
-    if cv2.minMaxLoc(res)[0] >= 0.1:
+    print(cv2.minMaxLoc(res))
+    if cv2.minMaxLoc(res)[0] >= 0.10:
         print(f'匹配{meter}失败')
         return None
     else:
@@ -40,14 +40,20 @@ def count(box, backpack, meter):
     if material_map[meter] == 'xinyongdian':
         new_img = new_img[upper_left[1]:lower_right[1], lower_right[0]:lower_right[0] + 100]
     else:
-        new_img = new_img[lower_right[1]:lower_right[1] + 20, upper_left[0] - 10:lower_right[0] + 10]
+        new_img = new_img[lower_right[1]:lower_right[1] + 21, upper_left[0] - 5:lower_right[0] + 5]
+
+    # cv2.imshow('img', new_img)
+    # cv2.waitKey()
 
     # 设置阈值
     height, width = new_img.shape[0:2]
-    points = (width * 3, height * 3)
+    points = (width * 10, height * 10)
     new_img = cv2.resize(new_img, points, cv2.INTER_LINEAR)
     height, width = new_img.shape[0:2]
-    thresh = 150
+
+    # new_img = cv2.blur(new_img, (3, 3))
+
+    thresh = 160
     for row in range(height):
         for col in range(width):
             # 获取到灰度值
@@ -62,13 +68,16 @@ def count(box, backpack, meter):
     string = pytesseract.image_to_string(new_img, lang='eng',
                                          config='--psm 6 --oem 3 -c tessedit_char_whitelist=0123456789').strip()
 
-    print(string)
+    # print(string)
+    # cv2.imshow('img', new_img)
+    # cv2.waitKey()
+    cv2.imwrite(f'./out/{material_map[meter]}.png',new_img)
 
     if string == '':
         print(f'计算素材{meter}失败！！！！！！！')
         return -1
     else:
-        print(f'素材 {meter} 的个数为 {string}')
+        print(f'素材 {meter} 的个数为 \033[31m{string}\033[0m')
         try:
             return int(string)
         except:

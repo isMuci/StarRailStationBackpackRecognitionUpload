@@ -1,1 +1,1 @@
-invalid literal for int() with base 10: ''
+EOF when reading a line

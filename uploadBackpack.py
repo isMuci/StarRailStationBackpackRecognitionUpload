@@ -9,9 +9,8 @@ from getConfig import *
 def update(browser, material):
     try:
         print("正在寻找背包按钮......")
-        # //*[@id="page"]/div[2]/div[2]/div[2]/div/div/button[3]
-        # //*[@id="page"]/div[2]/div[2]/div[1]/div/div/button[3]
-        browser.find_element(By.XPATH, '//*[@id="page"]/div[2]/div[2]/div[1]/div/div/button[3]').click()
+        # //*[@id="page"]/div[2]/div[2]/div[2]/div/div[1]/button[3]
+        browser.find_element(By.XPATH, '//*[@id="page"]/div[2]/div[2]/div[2]/div/div[1]/button[3]').click()
 
         print("正在获取背包内容表......")
         # //*[@id="page"]/div[2]/div[3]/div/div/div[2]/div/div
@@ -34,7 +33,6 @@ def update(browser, material):
             x.send_keys(material[cnt][1])
             print(f'填入材料 {material[cnt][0]} 完成！ 数量 {material[cnt][1]}')
             cnt += 1
-        # print("4")
         # //*[@id="page"]/div[2]/div[3]/div/div/div[1]/div[2]/button[1]
         browser.find_element(By.XPATH, '//*[@id="page"]/div[2]/div[3]/div/div/div[1]/div[2]/button[1]').click()
     except Exception as e:
