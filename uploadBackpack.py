@@ -9,12 +9,12 @@ from getConfig import *
 def update(browser, material):
     try:
         print("正在寻找背包按钮......")
-        # //*[@id="page"]/div[2]/div[2]/div[2]/div/div[1]/button[3]
-        browser.find_element(By.XPATH, '//*[@id="page"]/div[2]/div[2]/div[2]/div/div[1]/button[3]').click()
+        # //*[@id="page"]/div/div[2]/div[2]/div/div[1]/button[3]
+        browser.find_element(By.XPATH, '//*[@id="page"]/div/div[2]/div[2]/div/div[1]/button[3]').click()
 
         print("正在获取背包内容表......")
-        # //*[@id="page"]/div[2]/div[3]/div/div/div[2]/div/div
-        material_list = browser.find_elements(By.XPATH, '//*[@id="page"]/div[2]/div[3]/div/div/div[2]/div/div/div')
+        # //*[@id="page"]/div/div[3]/div/div/div[2]/div/div/div
+        material_list = browser.find_elements(By.XPATH, '//*[@id="page"]/div/div[3]/div/div/div[2]/div/div/div')
 
         if len(material) == 0:
             materialHistory = []
@@ -26,6 +26,7 @@ def update(browser, material):
 
         print("正在向背包内填入材料......")
         cnt = 0
+        print(len(material_list))
         for item in material_list:
             # print(item.tag_name)
             x = item.find_element(By.TAG_NAME, 'input')
@@ -33,8 +34,8 @@ def update(browser, material):
             x.send_keys(material[cnt][1])
             print(f'填入材料 {material[cnt][0]} 完成！ 数量 {material[cnt][1]}')
             cnt += 1
-        # //*[@id="page"]/div[2]/div[3]/div/div/div[1]/div[2]/button[1]
-        browser.find_element(By.XPATH, '//*[@id="page"]/div[2]/div[3]/div/div/div[1]/div[2]/button[1]').click()
+        # //*[@id="page"]/div/div[3]/div/div/div[1]/div[2]/button[1]
+        browser.find_element(By.XPATH, '//*[@id="page"]/div/div[3]/div/div/div[1]/div[2]/button[1]').click()
     except Exception as e:
         print(type(e))
         update(browser, material)
